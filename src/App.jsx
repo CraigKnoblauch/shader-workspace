@@ -1,35 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Canvas } from '@react-three/fiber';
+import { useRef } from 'react';
+import { shaderMaterial } from '@react-three/drei';
+import './style.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+import myFragmentShader from './shaders/fragment.glsl'
+import myVertexShader from './shaders/vertex.glsl'
+
+const Cube = () => {
+  const mesh = useRef();
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <mesh ref={mesh}>
+      <boxGeometry args={[1, 1, 1]} />
+      <shaderMaterial 
+        fragmentShader = { myFragmentShader }
+        vertexShader = { myVertexShader }
+      />
+    </mesh>
+  );
+};
+
+const App = () => {
+  return (
+    <Canvas>
+      <Cube />
+    </Canvas>
+  );
+};
 
 export default App
