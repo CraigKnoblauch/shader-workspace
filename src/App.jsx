@@ -22,7 +22,7 @@ const Cube = () => {
 
   return (
     <mesh ref={mesh}>
-      <icosahedronGeometry args={[2, 20]} />
+      <planeGeometry args={[2, 2, 10, 10]} />
       <shaderMaterial 
         uniforms={ uniforms }
         fragmentShader = { myFragmentShader }
