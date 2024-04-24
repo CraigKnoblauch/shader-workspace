@@ -1,6 +1,6 @@
 import { Canvas } from '@react-three/fiber';
 import { useMemo, useRef } from 'react';
-import { shaderMaterial } from '@react-three/drei';
+import { OrbitControls, shaderMaterial } from '@react-three/drei';
 import './style.css'
 import * as Three from 'three'
 
@@ -22,7 +22,7 @@ const Cube = () => {
 
   return (
     <mesh ref={mesh}>
-      <planeGeometry args={[2, 2, 10, 10]} />
+      <planeGeometry args={[2, 2, 100, 100]} />
       <shaderMaterial 
         uniforms={ uniforms }
         fragmentShader = { myFragmentShader }
@@ -35,6 +35,7 @@ const Cube = () => {
 const App = () => {
   return (
     <Canvas>
+      <OrbitControls />
       <Cube />
     </Canvas>
   );
